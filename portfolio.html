@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anushka Gupta — Game Designer & Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080808;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: rgba(255,255,255,0.07);
+    --text: #f0ede8;
+    --muted: #6b6b6b;
+    --accent: #e8924a;
+    --accent2: #f5c842;
+    --tag-bg: rgba(232, 146, 74, 0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(8,8,8,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 6rem 3rem 4rem;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3.5rem, 9vw, 9rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-desc {
+    max-width: 420px;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  .hero-desc strong { color: var(--text); font-weight: 400; }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    text-align: right;
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── FILTER BAR ─── */
+  .filter-section {
+    padding: 3rem 3rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+    position: sticky;
+    top: 73px;
+    background: rgba(8,8,8,0.9);
+    backdrop-filter: blur(20px);
+    z-index: 50;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filter-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 0.5rem;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.4rem 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border-radius: 2rem;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  /* ─── GRID ─── */
+  .works-section {
+    padding: 3rem;
+  }
+
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* ─── CARD ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(.23,1,.32,1), border-color 0.3s, box-shadow 0.3s;
+    animation: fadeUp 0.6s both;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(232,146,74,0.25);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,146,74,0.1);
+  }
+
+  .card-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--surface2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-image-placeholder {
+    font-family: 'Syne', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    letter-spacing: -0.02em;
+    text-align: center;
+    padding: 1rem;
+    line-height: 1;
+  }
+
+  .card-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 60%, rgba(232,146,74,0.06));
+  }
+
+  .card-status {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .status-live { background: rgba(245,200,66,0.15); color: var(--accent2); border: 1px solid rgba(245,200,66,0.2); }
+  .status-draft { background: rgba(232,146,74,0.1); color: var(--accent); border: 1px solid rgba(232,146,74,0.2); }
+  .status-wip { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--tag-bg);
+    border: 1px solid rgba(232,146,74,0.15);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+  }
+
+  .tag.engine { color: var(--muted); background: transparent; border-color: var(--border); }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-org {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .card-arrow {
+    color: var(--accent);
+    font-size: 1rem;
+    transition: transform 0.2s;
+  }
+
+  .card:hover .card-arrow { transform: translate(3px, -3px); }
+
+  /* card sizes */
+  .card-wide { grid-column: span 2; }
+  .card-wide .card-image { aspect-ratio: 21/9; }
+
+  /* ─── ABOUT SECTION ─── */
+  .about-section {
+    padding: 6rem 3rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .about-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .about-body {
+    font-size: 0.85rem;
+    line-height: 2;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-body strong { color: var(--text); font-weight: 400; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .skill-item {
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  .skill-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .skill-detail {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+  .card:nth-child(7) { animation-delay: 0.35s; }
+  .card:nth-child(8) { animation-delay: 0.4s; }
+  .card:nth-child(9) { animation-delay: 0.45s; }
+  .card:nth-child(10) { animation-delay: 0.5s; }
+  .card:nth-child(11) { animation-delay: 0.55s; }
+  .card:nth-child(12) { animation-delay: 0.6s; }
+  .card:nth-child(13) { animation-delay: 0.65s; }
+
+  /* ─── HIDDEN ─── */
+  .card.hidden { display: none; }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .hero-bottom { flex-direction: column; gap: 2rem; align-items: flex-start; }
+    .hero-stats { text-align: left; }
+    .filter-section { padding: 1.5rem; top: 61px; }
+    .works-section { padding: 1.5rem; }
+    .card-wide { grid-column: span 1; }
+    .about-section { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+    footer { flex-direction: column; gap: 2rem; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-name">Anushka Gupta</div>
+  <ul class="nav-links">
+    <li><a href="#works">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="https://www.guptanushka.com/uploads/1/3/5/7/135774376/anushkagupta_resume.pdf" target="_blank">Résumé ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Game Design & Development Research</p>
+  <h1 class="hero-title">Anushka<br><span>Gupta.</span></h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      <strong>Game programmer, technical artist, and animator</strong> with a B.S. in Game Design & Development from Purdue University. Interested in researching <strong>AI-driven NPC behavior, shader development, and simulation-based learning games.</strong> Currently a game programmer intern at T'sar E.
+    </p>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">13</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div>
+        <span class="stat-num">3</span>
+        <span class="stat-label">Studios</span>
+      </div>
+      <div>
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Years</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-section" id="works">
+  <span class="filter-label">Filter —</span>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="shader">Shaders</button>
+  <button class="filter-btn" data-filter="ai">AI / NPC</button>
+  <button class="filter-btn" data-filter="animation">Animation</button>
+  <button class="filter-btn" data-filter="mechanic">Game Mechanics</button>
+  <button class="filter-btn" data-filter="production">Production</button>
+</div>
+
+<!-- WORKS GRID -->
+<section class="works-section">
+  <div class="works-grid" id="grid">
+
+    <!-- 1. Agronova — WIDE -->
+    <div class="card card-wide" data-category="production mechanic">
+      <div class="card-image">
+        <div class="card-image-placeholder">AGRONOVA</div>
+        <span class="card-status status-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Game Producer</span>
+          <span class="tag">Technical Artist</span>
+          <span class="tag engine">UE5 · Maya</span>
+        </div>
+        <h2 class="card-title">Agronova — SimGen Studio</h2>
+        <p class="card-desc">Narrative open-world game teaching drone operation and agriculture to high school students. Led production pipeline and technical art; managed multitasking and prioritization systems through drone hardware and farming simulations.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Purdue Capstone · 2023–24</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 2. VHS Post Process -->
+    <div class="card" data-category="shader">
+      <div class="card-image" style="background: linear-gradient(135deg, #1a0a0a, #0d0d1a);">
+        <div class="card-image-placeholder">VHS</div>
+        <span class="card-status status-draft">Draft</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Post Process Shader</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">VHS Post Process Effect</h2>
+        <p class="card-desc">Multiplayer-optimized VHS distortion shader with a reusable scrambler function. Built for Parallax Protocol with performance constraints for networked play.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Melanated Game Kitchen · 2025</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 3. Spooky Post Process -->
+    <div class="card" data-category="shader">
+      <div class="card-image" style="background: linear-gradient(135deg, #0a0a1a, #1a0a2a);">
+        <div class="card-image-placeholder">FOG</div>
+        <span class="card-status status-draft">Draft</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Post Process Shader</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">Spooky Smoke Post Process</h2>
+        <p class="card-desc">Noise-based chromatic aberration shader creating an atmospheric smoky screen effect. Designed for horror/atmospheric game environments.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Melanated Game Kitchen · 2025</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 4. Occlusion Mask Camera -->
+    <div class="card" data-category="shader">
+      <div class="card-image" style="background: linear-gradient(135deg, #0a1a0a, #1a1a0a);">
+        <div class="card-image-placeholder">DOT·PRODUCT</div>
+        <span class="card-status status-wip">WIP</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Camera Shader</span>
+          <span class="tag">Isometric</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">Occlusion Mask Camera System</h2>
+        <p class="card-desc">Dot product–based angle calculation ensuring character visibility at all times in a fixed isometric environment. Solves the classic wall-occlusion problem for top-down perspectives.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Melanated Game Kitchen · 2025</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 5. Cel Shader -->
+    <div class="card" data-category="shader">
+      <div class="card-image" style="background: linear-gradient(135deg, #0a1a1a, #1a0a0a);">
+        <div class="card-image-placeholder">CEL</div>
+        <span class="card-status status-draft">Draft</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Post Process Shader</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">Cel → PBR Shader Evolution</h2>
+        <p class="card-desc">Designed as a cel shader for Sunflower, later iterated into a physically-based rendering approach. Documents design decisions behind the aesthetic shift.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">P1 Games · 2024</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 6. Deer AI -->
+    <div class="card" data-category="ai">
+      <div class="card-image" style="background: linear-gradient(135deg, #0f1a0a, #1a150a);">
+        <div class="card-image-placeholder">DEER·AI</div>
+        <span class="card-status status-draft">Draft</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">AI NPC</span>
+          <span class="tag">Behavior Tree</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">Deer AI Behaviour System</h2>
+        <p class="card-desc">NPC behavior design for a deer AI — prototyped, then scrapped due to debug complexity. Documents the design intent, failure mode, and lessons learned in UE5's AI framework.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">P1 Games · 2024</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 7. Dialogue System -->
+    <div class="card" data-category="mechanic">
+      <div class="card-image" style="background: linear-gradient(135deg, #1a1a0a, #0a0f1a);">
+        <div class="card-image-placeholder">DIALOGUE</div>
+        <span class="card-status status-wip">WIP</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Game Mechanic</span>
+          <span class="tag">Narrative Systems</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">Tree-Level Dialogue System</h2>
+        <p class="card-desc">Branching dialogue system built on a tree-level architecture. Supports dynamic NPC conversations with multi-path narrative outcomes for Sunflower.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">P1 Games · 2024</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 8. Auto Rigger Tool -->
+    <div class="card" data-category="animation">
+      <div class="card-image" style="background: linear-gradient(135deg, #0a0f1a, #1a0a0f);">
+        <div class="card-image-placeholder">AUTO·RIG</div>
+        <span class="card-status status-wip">WIP</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Animation Tool</span>
+          <span class="tag">Python</span>
+          <span class="tag engine">Maya</span>
+        </div>
+        <h2 class="card-title">Auto Rigger Tool</h2>
+        <p class="card-desc">One-click rigging pipeline tool built in Python for Autodesk Maya. Custom UI with node-based architecture enabling fast character rig generation with minimal manual steps.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Purdue Capstone · 2024</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 9. Rigging & Retargeting -->
+    <div class="card" data-category="animation production">
+      <div class="card-image" style="background: linear-gradient(135deg, #1a0a1a, #0a1a0a);">
+        <div class="card-image-placeholder">RETARGET</div>
+        <span class="card-status status-wip">WIP</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Animation Pipeline</span>
+          <span class="tag engine">Maya · UE5</span>
+        </div>
+        <h2 class="card-title">Rigging & Retargeting Pipeline</h2>
+        <p class="card-desc">Multi-rig targeting system smoothing animation pipeline timing for educational game content. Reduced iteration time for learning-focused game assets in Agronova.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Purdue Capstone · 2023</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 10. P1 Games Sunflower -->
+    <div class="card" data-category="mechanic production">
+      <div class="card-image" style="background: linear-gradient(135deg, #1a1a0a, #0a1a10);">
+        <div class="card-image-placeholder">SUNFLOWER</div>
+        <span class="card-status status-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Game Programmer</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">P1 Games: Sunflower</h2>
+        <p class="card-desc">Volunteer game jam project with team Mighty Hibiscus. Programmed dialogue system, deer AI behavior, and cel shader post-process feature over an 8-week sprint.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">P1 Games · Aug–Oct 2024</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 11. Dust Bunnies -->
+    <div class="card" data-category="mechanic">
+      <div class="card-image" style="background: linear-gradient(135deg, #1a0a0f, #0f0a1a);">
+        <div class="card-image-placeholder">DUST·BUNNIES</div>
+        <span class="card-status status-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Game Programming</span>
+          <span class="tag engine">Unity</span>
+        </div>
+        <h2 class="card-title">Dust Bunnies</h2>
+        <p class="card-desc">3D platformer featuring Teddy, with custom character mechanics and interactive game systems built in Unity.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Purdue</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 12. AI Features Game Set -->
+    <div class="card" data-category="ai mechanic">
+      <div class="card-image" style="background: linear-gradient(135deg, #001a0f, #0a0a1a);">
+        <div class="card-image-placeholder">AI·SET</div>
+        <span class="card-status status-live">Live</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">AI Features</span>
+          <span class="tag">Game Programming</span>
+          <span class="tag engine">Unity</span>
+        </div>
+        <h2 class="card-title">AI Features Game Set</h2>
+        <p class="card-desc">Collection of AI-driven game mechanics exploring NPC intelligence, pathfinding, and behavior system design.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Purdue</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+    <!-- 13. Decal Water Spray -->
+    <div class="card" data-category="shader">
+      <div class="card-image" style="background: linear-gradient(135deg, #0a0f1a, #001a1a);">
+        <div class="card-image-placeholder">DECAL</div>
+        <span class="card-status status-wip">WIP</span>
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Material / Shader</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">Decal Water Spray Material</h2>
+        <p class="card-desc">Dynamic water spray material using UE5 decal system. Key insight: decal scale must be tuned for in-world visibility — documents a common but underdocumented UE5 pitfall.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Purdue Capstone · 2024</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div>
+    <p class="section-label">About</p>
+    <h2 class="about-title">Building games that think.</h2>
+    <p class="about-body">
+      I'm <strong>Anushka</strong> — a game programmer and technical artist who graduated from <strong>Purdue University</strong> with a B.S. in Game Design & Development and Animation, plus a Certificate in Data Science.
+    </p>
+    <p class="about-body">
+      I'm interested in the intersection of <strong>AI behavior systems, real-time shaders, and simulation-based learning</strong> — and how these tools can be used to build games that are not just fun, but genuinely educational or emotionally expressive.
+    </p>
+    <p class="about-body">
+      Currently a game programmer intern at <strong>T'sar E</strong> in Rockford, Illinois. Applying to graduate research programs in game design and development.
+    </p>
+  </div>
+  <div>
+    <p class="section-label">Skills</p>
+    <div class="skills-grid">
+      <div class="skill-item">
+        <div class="skill-name">Unreal Engine 5</div>
+        <div class="skill-detail">Blueprints · Materials · AI · Post Process</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Unity</div>
+        <div class="skill-detail">C# · Game Mechanics · NPC Systems</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Autodesk Maya</div>
+        <div class="skill-detail">Rigging · Animation · Python Tools</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Python</div>
+        <div class="skill-detail">Maya Scripting · Tool Development</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Shader Dev</div>
+        <div class="skill-detail">HLSL · UE5 Material Editor · Post Process</div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name">Data Science</div>
+        <div class="skill-detail">Analysis · Visualization · Applied Math</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Anushka Gupta</div>
+  <div class="footer-links">
+    <a href="/cdn-cgi/l/email-protection#a9d0c6dcdbe9ccc4c8c0c587cac6c4">Email</a>
+    <a href="https://www.guptanushka.com/uploads/1/3/5/7/135774376/anushkagupta_resume.pdf" target="_blank">Résumé</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Filter logic
+  const btns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category.includes(filter)) {
+          card.c
