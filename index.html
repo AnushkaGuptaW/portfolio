@@ -504,11 +504,13 @@
   <!-- <p class="hero-eyebrow">Game Design & Development Research</p> -->
   <h1 class="hero-title">Anushka<br><span>Gupta.</span></h1>
   <div class="hero-bottom">
-    <!-- <p class="hero-desc">
+     <!-- <p class="hero-desc">
       <strong>Game programmer, technical artist, and animator</strong> with a B.S. in Game Design & Development from Purdue University. Interested in researching <strong>AI-driven NPC behavior, shader development, and simulation-based learning games.</strong> Currently a game programmer intern at T'sar E.
-    </p> -->
+    </p>  -->
     <p class="hero-desc">
-      <strong>Game programmer, technical artist, and animator</strong> with a B.S. in Game Design & Development from Purdue University. Interested in researching <strong>AI-driven NPC behavior, shader development, and simulation-based learning games.</strong> Currently developing a personal project and working as a <strong>Data Analyst</strong>. 
+      <strong>Game programmer, technical artist, and animator</strong> with a B.S. in Game Design & Development from Purdue University. Interested in researching <strong>AI-driven NPC behavior, shader development, and simulation-based learning games.</strong>
+        
+      <!-- </strong> Currently developing a personal project and working as a <strong>Data Analyst</strong>.  -->
       <!-- preparing for graduate research in Germany. -->
     </p>
     <div class="hero-stats">
@@ -537,15 +539,37 @@
   <button class="filter-btn" data-filter="animation">Animation</button>
   <button class="filter-btn" data-filter="mechanic">Game Mechanics</button>
   <button class="filter-btn" data-filter="production">Production</button>
+  <!-- 
   <span class="filter-label" style="margin-left:1rem">Year —</span>
   <button class="filter-btn" data-filter-year="2025">2025</button>
   <button class="filter-btn" data-filter-year="2024">2024</button>
   <button class="filter-btn" data-filter-year="2023">2023</button>
+   -->
 </div>
 
 <!-- WORKS GRID -->
 <section class="works-section">
   <div class="works-grid" id="grid">
+    <!-- 2. VHS Post Process -->
+    <a href="project-VHSpp.html" style="text-decoration:none;color:inherit"><div class="card card-wide" data-category="shader" data-year="2025">
+      <div class="card-image" style="background: linear-gradient(135deg, #1a0a0a, #0d0d1a);">
+        <img src="assets/vhs/VHS_in_Game_gif.gif" alt="VHS shader in Parallax Protocol" style="width:100%; border-radius:8px;">
+        <!-- <div class="card-image-placeholder">VHS</div> -->
+        <!-- <span class="card-status status-draft">Draft</span> -->
+      </div>
+      <div class="card-body">
+        <div class="card-tags">
+          <span class="tag">Post Process Shader</span>
+          <span class="tag engine">UE5</span>
+        </div>
+        <h2 class="card-title">VHS Post Process Effect</h2>
+        <p class="card-desc">Multiplayer-optimized VHS distortion shader with a reusable scrambler function. Built for Parallax Protocol with performance constraints for networked play.</p>
+      </div>
+      <div class="card-footer">
+        <span class="card-org">Melanated Game Kitchen · 2025</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </div>
 
     <!-- 1. Agronova — WIDE -->
     <a href="project-Agronova.html" style="text-decoration:none;color:inherit"><div class="card card-wide" data-category="production mechanic" data-year="2023 2024">
@@ -568,26 +592,7 @@
       </div>
     </div>
 
-    <!-- 2. VHS Post Process -->
-    <a href="project-VHSpp.html" style="text-decoration:none;color:inherit"><div class="card card-wide" data-category="shader" data-year="2025">
-      <div class="card-image" style="background: linear-gradient(135deg, #1a0a0a, #0d0d1a);">
-        <div class="card-image-placeholder">VHS</div>
-        <!-- <span class="card-status status-draft">Draft</span> -->
-      </div>
-      <div class="card-body">
-        <div class="card-tags">
-          <span class="tag">Post Process Shader</span>
-          <span class="tag engine">UE5</span>
-        </div>
-        <h2 class="card-title">VHS Post Process Effect</h2>
-        <p class="card-desc">Multiplayer-optimized VHS distortion shader with a reusable scrambler function. Built for Parallax Protocol with performance constraints for networked play.</p>
-      </div>
-      <div class="card-footer">
-        <span class="card-org">Melanated Game Kitchen · 2025</span>
-        <span class="card-arrow">↗</span>
-      </div>
-    </div>
-
+    
     <!-- 3. Spooky Post Process -->
     <a href="project-SpookyPP.html" style="text-decoration:none;color:inherit"><div class="card card-wide" data-category="shader" data-year="2025">
       <div class="card-image" style="background: linear-gradient(135deg, #0a0a1a, #1a0a2a);">
@@ -875,7 +880,7 @@
 
 <script>
   const cardLinks = [
-    'project-Agronova.html', 'project-VHSpp.html', 'project-SpookyPP.html',
+    'project-VHSpp.html', 'project-SpookyPP.html', 'project-Agronova.html', 
     'project-OcclusionMask.html', 'project-CelShader.html', 'project-DeerAI.html',
     'project-DialogueSystem.html', 'project-AutoRigger.html', 'project-RiggingRetargeting.html',
     'project-SunflowerGame.html', 'project-DustBunnies.html', 'project-AIFeatures.html', 'project-DecalWaterSpray.html',
