@@ -2,60 +2,57 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Cel to PBR Shader — Anushka Gupta</title>
+<title>Cel → PBR Shader Evolution — Anushka Gupta</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#080808;--surface:#111111;--surface2:#1a1a1a;--border:rgba(255,255,255,0.07);--text:#f0ede8;--muted:#6b6b6b;--accent:#e8924a;--accent2:#f5c842;--tag-bg:rgba(232,146,74,0.08)}
+:root{--bg:#080808;--surface:#111111;--border:rgba(255,255,255,0.07);--text:#f0ede8;--muted:#6b6b6b;--accent:#e8924a;--tag-bg:rgba(232,146,74,0.08)}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Mono',monospace;min-height:100vh}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 3rem;background:rgba(8,8,8,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
 .nav-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:var(--text)}
-.nav-back{color:var(--muted);text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
-.nav-back:hover{color:var(--accent)}
+.nav-back{color:var(--muted);text-decoration:none;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}.nav-back:hover{color:var(--accent)}
 .project-hero{padding:10rem 3rem 4rem;border-bottom:1px solid var(--border);opacity:0;animation:fadeUp .8s .2s forwards}
-.breadcrumb{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;display:flex;gap:.75rem;align-items:center}
-.breadcrumb span{color:var(--accent)}
+.breadcrumb{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;display:flex;gap:.75rem}.breadcrumb span{color:var(--accent)}
 .project-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,7vw,6rem);line-height:.95;letter-spacing:-.02em;margin-bottom:2rem}
-.project-meta-row{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem}
+.project-meta-row{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem}
 .tag{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);background:var(--tag-bg);border:1px solid rgba(232,146,74,.15);padding:.25rem .6rem;border-radius:3px}
 .tag.engine{color:var(--muted);background:transparent;border-color:var(--border)}
-.project-summary{max-width:700px;font-size:1rem;line-height:1.9;color:var(--muted)}
-.project-summary strong{color:var(--text);font-weight:400}
+.project-summary{max-width:700px;font-size:1rem;line-height:1.9;color:var(--muted)}.project-summary strong{color:var(--text);font-weight:400}
 .project-body{display:grid;grid-template-columns:1fr 280px;align-items:start}
 .project-main{padding:4rem 3rem;border-right:1px solid var(--border);opacity:0;animation:fadeUp .8s .4s forwards}
-.media-block{width:100%;aspect-ratio:16/9;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:3rem;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.media-caption{font-size:.7rem;color:var(--muted);margin-top:-2rem;margin-bottom:3rem}
+.video-block{width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem}
+.video-block iframe{width:100%;height:100%;border:none;display:block}
+.media-caption{font-size:.7rem;color:var(--muted);margin-bottom:3rem;letter-spacing:.05em}
+.media-placeholder{width:100%;aspect-ratio:16/9;border-radius:12px;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 .section-block{margin-bottom:3rem}
 .section-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .section-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;line-height:1.2}
-.section-text{font-size:.85rem;line-height:2;color:var(--muted);max-width:620px}
-.section-text strong{color:var(--text);font-weight:400}
+.section-text{font-size:.85rem;line-height:2;color:var(--muted)}.section-text strong{color:var(--text);font-weight:400}
 .feature-list{list-style:none;margin-top:1rem}
 .feature-list li{font-size:.82rem;line-height:1.8;color:var(--muted);padding:.75rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem;align-items:flex-start}
-.feature-list li::before{content:'→';color:var(--accent);flex-shrink:0}
-.feature-list li strong{color:var(--text);font-weight:400}
+.feature-list li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:.05rem}.feature-list li strong{color:var(--text);font-weight:400}
 .research-callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin:2rem 0}
 .research-callout .label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
-.research-callout p{font-size:.82rem;line-height:1.9;color:var(--muted)}
-.research-callout p strong{color:var(--text);font-weight:400}
+.research-callout p{font-size:.82rem;line-height:1.9;color:var(--muted)}.research-callout p strong{color:var(--text);font-weight:400}
+.node-viewer{overflow:scroll;height:260px;cursor:grab;border-radius:12px;border:1px solid var(--border);background:var(--surface);position:relative;user-select:none;margin-bottom:3rem}
+.node-viewer:active{cursor:grabbing}
+.node-viewer img{height:100%;max-width:none;display:block;pointer-events:none}
+.node-viewer-hint{position:absolute;bottom:8px;right:10px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:rgba(8,8,8,.7);padding:3px 8px;border-radius:4px;pointer-events:none}
 .project-sidebar{padding:4rem 2rem;position:sticky;top:73px;opacity:0;animation:fadeUp .8s .5s forwards}
-.sidebar-block{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
-.sidebar-block:last-child{border-bottom:none}
+.sidebar-block{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}.sidebar-block:last-child{border-bottom:none}
 .sidebar-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
 .sidebar-value{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;line-height:1.5}
 .sidebar-value.small{font-family:'DM Mono',monospace;font-size:.78rem;font-weight:400;color:var(--muted);line-height:1.8}
 .project-footer{padding:3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.next-project{text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:.25rem;transition:opacity .2s}
-.next-project:hover{opacity:.7}
+.next-project{text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:.25rem;transition:opacity .2s}.next-project:hover{opacity:.7}
 .next-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 .next-title{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700}
-.back-btn{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
-.back-btn:hover{color:var(--accent)}
+.back-btn{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}.back-btn:hover{color:var(--accent)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}}
+@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.sidebar-block{border-bottom:none;padding-bottom:0}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}}
 </style>
 </head>
 <body>
@@ -64,44 +61,59 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   <div class="breadcrumb">All Work <span>/</span> Shaders</div>
   <h1 class="project-title">Cel → PBR<br>Shader Evolution</h1>
   <div class="project-meta-row">
-    <span class="tag">Post Process Shader</span><span class="tag">Stylised Rendering</span><span class="tag">PBR</span><span class="tag engine">Unreal Engine 5</span>
+    <span class="tag">Post Process Shader</span><span class="tag">PBR</span><span class="tag engine">Unreal Engine 5</span>
   </div>
-  <p class="project-summary">Started as a <strong>classic cel shader</strong> for the Sunflower game jam, then redesigned into a physically-based rendering approach mid-project — documenting a real design pivot under time pressure.</p>
+  <p class="project-summary">A shader that <strong>started as cel and became something else</strong> — this page documents not just what I built, but why the aesthetic direction shifted mid-project and what that decision-making process looked like.</p>
 </header>
 <div class="project-body">
 <main class="project-main">
-  <div class="media-block">Add screenshot or GIF here</div>
-  <p class="media-caption">Cel shader (left) vs PBR adaptation (right) — Sunflower, P1 Games 2024</p>
+
+  <div class="video-block">
+    <iframe src="https://www.youtube.com/embed/yFERDNLbpC8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <p class="media-caption">Cel shader implementation for Sunflower — P1 Games 2024</p>
+
   <div class="section-block">
     <p class="section-label">The Problem</p>
-    <h2 class="section-title">Stylised vs. physically grounded</h2>
-    <p class="section-text">Team Mighty Hibiscus initially agreed on a hand-drawn cel aesthetic for Sunflower. After implementing the cel shader, playtesting revealed that the flat look conflicted with UE5's lighting system, causing characters to read poorly against the environment. I had to <strong>evaluate the original design decision and propose a shift to PBR</strong> mid-jam.</p>
+    <h2 class="section-title">When the aesthetic stopped fitting</h2>
+    <p class="section-text">Sunflower started with a cel-shaded look — flat colour bands, hard shadow edges, hand-drawn feel. The shader worked technically, but as the game's environment developed the flat shading started to fight the lighting. The team decided the world needed more physical weight. That meant rebuilding the shader around a <strong>physically-based rendering approach</strong> instead.</p>
   </div>
+
   <div class="section-block">
-    <p class="section-label">What I Built</p>
-    <h2 class="section-title">What changed and why</h2>
+    <p class="section-label">Technical Breakdown</p>
+    <h2 class="section-title">How the cel shader worked</h2>
     <ul class="feature-list">
-      <li><strong>Original cel shader</strong> — step-based diffuse banding with outlined edges using post-process depth and normal edge detection</li>
-      <li><strong>The problem</strong> — flat shading broke UE5's dynamic lighting and made the scene read as two disconnected visual layers</li>
-      <li><strong>PBR adaptation</strong> — retained stylised colour palette and toon-like roughness values while working with, not against, the engine's lighting model</li>
-      <li><strong>Design decision</strong> — documented the trade-off for the team: losing the hand-drawn feel but gaining visual coherence and faster lighting iteration</li>
+      <li><strong>Diffuse banding</strong> — scene colour channel isolated into fixed value bands to create flat toon shading; blendable location set to "scene color before DOF" to reduce shadow jitter</li>
+      <li><strong>Threshold stepping</strong> — instead of smooth gradients, light values snapped to discrete stops giving the characteristic cel look</li>
+      <li><strong>PBR iteration</strong> — the rebuilt version removed the banding and worked with UE5's physically-based material pipeline directly, preserving roughness and metallic channels</li>
     </ul>
   </div>
+
+  <!-- Add screenshots here when available -->
+  <!-- <div class="media-placeholder">Add before/after screenshots here</div> -->
+  <!-- Pannable blueprint — add when you have the BP screenshot -->
+  <div class="node-viewer" id="nodeViewer">
+    <img src="assets/cel/cel_bp.png" alt="Cel Shader Blueprint" id="nodeImg">
+    <span class="node-viewer-hint">drag to pan · scroll to zoom</span>
+  </div> 
+
   <div class="section-block">
     <p class="section-label">Reflection</p>
     <h2 class="section-title">What this taught me</h2>
-    <p class="section-text">The most valuable part of this project wasn't the shader itself — it was <strong>learning to reverse a design decision under deadline pressure</strong> and communicate that change clearly to a team. The technical implementation was secondary to the design reasoning.</p>
+    <p class="section-text">The interesting part wasn't the shader math — it was learning that <strong>a technically correct shader can still be the wrong choice</strong>. The cel version wasn't broken. It just stopped serving the game. Rebuilding it as PBR was a design decision as much as a technical one, and making that call mid-project taught me to think about shaders in terms of what the scene needs, not just what the technique can do.</p>
   </div>
+
   <div class="research-callout">
     <p class="label">Research Question</p>
-    <p>When does stylised rendering work against an engine's pipeline rather than with it — and how should that constraint inform <strong>early aesthetic decisions</strong> in game production?</p>
+    <p>How do <strong>aesthetic commitments in real-time rendering</strong> interact with iterative game development — and at what point does a technically sound shader become the wrong tool for the project?</p>
   </div>
+
 </main>
 <aside class="project-sidebar">
   <div class="sidebar-block"><p class="sidebar-label">Role</p><p class="sidebar-value">Shader Developer</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Project</p><p class="sidebar-value">Sunflower</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Organisation</p><p class="sidebar-value">P1 Games</p></div>
-  <div class="sidebar-block"><p class="sidebar-label">Timeline</p><p class="sidebar-value small">Aug–Oct 2024<br>Game Jam</p></div>
+  <div class="sidebar-block"><p class="sidebar-label">Timeline</p><p class="sidebar-value small">Aug–Oct 2024<br>8-week sprint</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Tools</p><p class="sidebar-value small">Unreal Engine 5<br>UE5 Material Editor<br>Post Process Volume</p></div>
 </aside>
 </div>
@@ -109,4 +121,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   <a href="index.html" class="back-btn">← Back to all work</a>
   <a href="project-DeerAI.html" class="next-project"><span class="next-label">Next Project →</span><span class="next-title">Deer AI Behaviour System</span></a>
 </footer>
+<script>
+  const viewer = document.getElementById('nodeViewer');
+  if(viewer){
+    const img = document.getElementById('nodeImg');
+    let dragging=false,startX=0,startY=0,sX=0,sY=0,scale=1;
+    viewer.addEventListener('wheel',e=>{e.preventDefault();scale=Math.min(4,Math.max(1,scale+(e.deltaY>0?-.15:.15)));img.style.transform=`scale(${scale})`;img.style.transformOrigin='top left';},{passive:false});
+    viewer.addEventListener('mousedown',e=>{dragging=true;startX=e.pageX;startY=e.pageY;sX=viewer.scrollLeft;sY=viewer.scrollTop;viewer.style.cursor='grabbing';e.preventDefault();});
+    window.addEventListener('mouseup',()=>{dragging=false;if(viewer)viewer.style.cursor='grab';});
+    viewer.addEventListener('mousemove',e=>{if(!dragging)return;viewer.scrollLeft=sX-(e.pageX-startX);viewer.scrollTop=sY-(e.pageY-startY);});
+  }
+</script>
 </body></html>
