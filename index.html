@@ -19,13 +19,13 @@
     content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.4;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; background: rgba(8,8,8,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; background: rgba(8,8,8,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transform: translateY(-100%); transition: transform 0.4s cubic-bezier(.23,1,.32,1); }
   .nav-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.25rem; letter-spacing: 0.05em; text-transform: uppercase; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--accent); }
 
-  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 6rem 3rem 4rem; }
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 6rem 3rem 4rem; padding-bottom: 20vh; }
   .hero-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3.5rem, 9vw, 9rem); line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
   .hero-title span { color: var(--accent); }
   .hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid var(--border); padding-top: 2rem; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
@@ -39,7 +39,7 @@
 
   .tier-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
 
-  .tier1-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
+  .tier1-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
   .tier3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; text-decoration: none; color: inherit; transition: transform 0.3s cubic-bezier(.23,1,.32,1), border-color 0.3s, box-shadow 0.3s; animation: fadeUp 0.6s both; display: flex; flex-direction: column; }
@@ -123,7 +123,7 @@
   <div class="tier1-grid">
 
     <a href="project-VHSpp.html" class="card card-t1">
-      <div class="card-image"><img src="assets/vhs/VHS_in_Game_gif.gif" alt="VHS shader"></div>
+      <div class="card-image"><video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="assets/vhs/VHS_in_Game.mp4" type="video/mp4"></video></div>
       <div class="card-body">
         <div class="card-tags"><span class="tag">Post Process Shader</span><span class="tag engine">UE5</span></div>
         <h2 class="card-title">VHS Post Process Effect</h2>
@@ -133,7 +133,7 @@
     </a>
 
     <a href="project-SpookyPP.html" class="card card-t1">
-      <div class="card-image"><img src="assets/spooky/spooky_gif_ingame.gif" alt="Spooky shader"></div>
+      <div class="card-image"><video autoplay loop muted playsinline style="width:100%;height:100%;object-fit:cover;"><source src="assets/spooky/spooky_inggame.mp4" type="video/mp4"></video></div>
       <div class="card-body">
         <div class="card-tags"><span class="tag">Post Process Shader</span><span class="tag engine">UE5</span></div>
         <h2 class="card-title">Spooky Smoke Post Process</h2>
@@ -188,7 +188,8 @@
   <div class="tier1-grid" style="margin-bottom:4rem">
 
     <a href="project-Agronova.html" class="card card-t1">
-      <div class="card-image-placeholder">AGRONOVA</div>
+      <!-- <div class="card-image-placeholder">AGRONOVA</div> -->
+      <img src="assets/agronova.png" alt="Agronova Title Screen" style="width:100%; border-radius:8px;">
       <div class="card-body">
         <div class="card-tags"><span class="tag">Game Producer</span><span class="tag">Technical Artist</span><span class="tag engine">UE5 · Maya</span></div>
         <h2 class="card-title">Agronova — SimGen Studio</h2>
@@ -272,5 +273,15 @@
     <a href="https://linkedin.in/nush-gupta/" target="_blank">LinkedIn</a>
   </div>
 </footer>
+<script>
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      nav.style.transform = 'translateY(0)';
+    } else {
+      nav.style.transform = 'translateY(-100%)';
+    }
+  }, { passive: true });
+</script>
 </body>
 </html>

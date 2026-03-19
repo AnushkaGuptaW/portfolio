@@ -22,13 +22,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .project-summary{max-width:700px;font-size:1rem;line-height:1.9;color:var(--muted)}.project-summary strong{color:var(--text);font-weight:400}
 .project-body{display:grid;grid-template-columns:1fr 280px;align-items:start}
 .project-main{padding:4rem 3rem;border-right:1px solid var(--border);opacity:0;animation:fadeUp .8s .4s forwards}
-.media-block{width:100%;aspect-ratio:16/9;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);overflow:hidden}
-.media-block iframe{width:100%;height:100%;border:none;border-radius:12px}
+.media-block{width:100%;aspect-ratio:16/9;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1rem}
+.media-block iframe{width:100%;height:100%;border:none;display:block}
 .media-caption{font-size:.7rem;color:var(--muted);margin-bottom:3rem}
 .section-block{margin-bottom:3rem}
 .section-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .section-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem}
-.section-text{font-size:.85rem;line-height:2;color:var(--muted);max-width:620px}.section-text strong{color:var(--text);font-weight:400}
+.section-text{font-size:.85rem;line-height:2;color:var(--muted)}.section-text strong{color:var(--text);font-weight:400}
 .feature-list{list-style:none;margin-top:1rem}
 .feature-list li{font-size:.82rem;line-height:1.8;color:var(--muted);padding:.75rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem}
 .feature-list li::before{content:'→';color:var(--accent);flex-shrink:0}.feature-list li strong{color:var(--text);font-weight:400}
@@ -66,12 +66,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 <div class="project-body">
 <main class="project-main">
 
-  <!-- VIDEO 1 — replace YOUR_YOUTUBE_ID_1 -->
   <div class="media-block">
-    <!-- <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID_1" allowfullscreen></iframe> -->
-    Add Video 1 here
+    <iframe src="https://www.youtube.com/embed/VhA-N16ifi0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
-  <p class="media-caption">Part 1 — patrol/chase NPC and follow AI</p>
+  <p class="media-caption">Patrol / chase NPC, follow AI, day/night state switching, stamina scaling, and teleporting NPC</p>
 
   <div class="section-block">
     <p class="section-label">Part 1</p>
@@ -82,13 +80,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
       <li><strong>Implementation</strong> — Blackboard keys drive state transitions between patrol, alert, and chase; Behaviour Tree handles task execution at each state</li>
     </ul>
   </div>
-
-  <!-- VIDEO 2 — replace YOUR_YOUTUBE_ID_2 -->
-  <div class="media-block">
-    <!-- <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID_2" allowfullscreen></iframe> -->
-    Add Video 2 here
-  </div>
-  <p class="media-caption">Part 2 — day/night AI, stamina scaling, teleporting NPC, and day/night cycle widget</p>
 
   <div class="section-block">
     <p class="section-label">Part 2</p>
