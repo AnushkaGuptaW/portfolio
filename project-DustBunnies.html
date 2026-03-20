@@ -22,29 +22,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .project-summary{max-width:700px;font-size:1rem;line-height:1.9;color:var(--muted)}.project-summary strong{color:var(--text);font-weight:400}
 .project-body{display:grid;grid-template-columns:1fr 280px;align-items:start}
 .project-main{padding:4rem 3rem;border-right:1px solid var(--border);opacity:0;animation:fadeUp .8s .4s forwards}
-.media-block{width:100%;aspect-ratio:16/9;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);overflow:hidden}
-.media-block img,.media-block video{width:100%;height:100%;object-fit:cover;border-radius:12px}
-.media-block iframe{width:100%;height:100%;border:none;border-radius:12px}
-.media-caption{font-size:.7rem;color:var(--muted);margin-bottom:3rem}
+.video-block{width:65%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem}
+.video-block iframe{width:100%;height:100%;border:none;display:block}
+.media-caption{font-size:.7rem;color:var(--muted);margin-bottom:3rem;letter-spacing:.05em}
 .section-block{margin-bottom:3rem}
 .section-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .section-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem}
-.section-text{font-size:.85rem;line-height:2;color:var(--muted);max-width:620px}.section-text strong{color:var(--text);font-weight:400}
+.section-text{font-size:.85rem;line-height:2;color:var(--muted)}.section-text strong{color:var(--text);font-weight:400}
 .feature-list{list-style:none;margin-top:1rem}
-.feature-list li{font-size:.82rem;line-height:1.8;color:var(--muted);padding:.75rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem}
-.feature-list li::before{content:'→';color:var(--accent);flex-shrink:0}.feature-list li strong{color:var(--text);font-weight:400}
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:3rem}
-.two-col .media-block{margin-bottom:0}
-.research-callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin:2rem 0}
-.research-callout .label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
-.research-callout p{font-size:.82rem;line-height:1.9;color:var(--muted)}.research-callout p strong{color:var(--text);font-weight:400}
-.external-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-.ext-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--muted);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;transition:all .2s}
-.ext-btn:hover{border-color:var(--accent);color:var(--accent)}
+.feature-list li{font-size:.82rem;line-height:1.8;color:var(--muted);padding:.75rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem;align-items:flex-start}
+.feature-list li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:.05rem}.feature-list li strong{color:var(--text);font-weight:400}
+.ext-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--accent);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(232,146,74,.3);padding:.5rem 1rem;border-radius:4px;transition:all .2s;margin-top:1.5rem}
+.ext-link:hover{background:rgba(232,146,74,.08)}
 .project-sidebar{padding:4rem 2rem;position:sticky;top:73px;opacity:0;animation:fadeUp .8s .5s forwards}
 .sidebar-block{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}.sidebar-block:last-child{border-bottom:none}
 .sidebar-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-.sidebar-value{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600}
+.sidebar-value{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;line-height:1.5}
 .sidebar-value.small{font-family:'DM Mono',monospace;font-size:.78rem;font-weight:400;color:var(--muted);line-height:1.8}
 .project-footer{padding:3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .next-project{text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:.25rem;transition:opacity .2s}.next-project:hover{opacity:.7}
@@ -53,7 +46,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .back-btn{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}.back-btn:hover{color:var(--accent)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static}.two-col{grid-template-columns:1fr}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}}
+@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.sidebar-block{border-bottom:none;padding-bottom:0}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}.video-block{width:100%}}
 </style>
 </head>
 <body>
@@ -62,78 +55,36 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   <div class="breadcrumb">All Work <span>/</span> Game Mechanics</div>
   <h1 class="project-title">Dust<br>Bunnies</h1>
   <div class="project-meta-row">
-    <span class="tag">Game Programming</span>
-    <span class="tag">Character Mechanics</span>
-    <span class="tag">3D Art</span>
-    <span class="tag engine">Unreal Engine 5 · C++</span>
+    <span class="tag">Game Programming</span><span class="tag">3D Platformer</span><span class="tag engine">Unity · C++</span>
   </div>
-  <p class="project-summary">A <strong>3D puzzle and exploration game</strong> built around the idea of "little guy in a big world" — following an animated teddy bear helping other household objects, with mechanics built from the ground up in Blueprints and C++.</p>
+  <p class="project-summary">A <strong>3D puzzle and exploration platformer</strong> built in Unity — little guy, big world. Made in collaboration with environment artist Soraya Karimi.</p>
 </header>
 <div class="project-body">
 <main class="project-main">
 
-  <!-- ALPHA VIDEO — replace YOUR_YOUTUBE_ID with the actual ID -->
-  <div class="media-block">
-    <!-- <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID" allowfullscreen></iframe> -->
-    Add Alpha video here
+  <!-- Replace YOUTUBE_ID with the actual ID from the Weebly page -->
+  <div class="video-block">
+    <iframe src="https://www.youtube.com/embed/YOUTUBE_ID" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
-  <p class="media-caption">Alpha build — hang, climb, and double jump mechanics</p>
+  <p class="media-caption">Beta version gameplay — Dust Bunnies, Purdue</p>
 
   <div class="section-block">
-    <p class="section-label">The Game</p>
-    <h2 class="section-title">Little guy, big world</h2>
-    <p class="section-text">Dust Bunnies centres on a teddy bear navigating a room-scale environment, completing quests given by household objects. The main quest is set by the dustpan, with additional side quests from other objects throughout the world. The design challenge was making a <strong>low-stakes, easy-going game that still rewarded exploration and movement mastery.</strong></p>
-  </div>
-
-  <div class="section-block">
-    <p class="section-label">Alpha Build</p>
-    <h2 class="section-title">My responsibilities — Alpha</h2>
-    <ul class="feature-list">
-      <li><strong>Hang and climb mechanic</strong> — full ledge detection and character transition from hang to climb state, built in Blueprints</li>
-      <li><strong>Double jump</strong> — input-buffered double jump with apex detection for responsive feel</li>
-      <li><strong>Dust Bunny collection counter</strong> — UI widget tracking collectible count, persisting across level sections</li>
-    </ul>
-  </div>
-
-  <!-- BETA VIDEO — replace YOUR_YOUTUBE_ID_2 -->
-  <div class="media-block">
-    <!-- <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID_2" allowfullscreen></iframe> -->
-     <iframe width="465" height="292" src="https://www.youtube.com/embed/cdooaj8vZ4g" title="Dust Bunnies Game Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    Add Beta video here
-  </div>
-  <p class="media-caption">Beta build — push mechanic, dust bunny model, Niagara particles</p>
-
-  <div class="section-block">
-    <p class="section-label">Beta Build</p>
-    <h2 class="section-title">My responsibilities — Beta</h2>
-    <ul class="feature-list">
-      <li><strong>Push mechanic</strong> — physics-based object pushing with weight simulation, so larger objects resist being moved</li>
-      <li><strong>Dust bunny model</strong> — fully modelled, textured, rigged, and animated character asset built entirely by me</li>
-      <li><strong>Niagara particle system</strong> — dust trail particle effect triggered on movement, reinforcing the game's tactile, cosy feel</li>
-    </ul>
-  </div>
-
-  <div class="section-block">
-    <p class="section-label">Reflection</p>
-    <h2 class="section-title">What this taught me</h2>
-    <p class="section-text">Dust Bunnies was where I first built character mechanics from scratch end-to-end — from input handling to animation state machines to physics interaction. Working across both <strong>programming and 3D art on the same project</strong> showed me how tightly those disciplines are connected in production.</p>
-  </div>
-
-  <div class="research-callout">
-    <p class="label">Research Question</p>
-    <p>How do <strong>movement mechanic design decisions</strong> — hang, climb, push — shape player spatial reasoning in exploration games, and how can those mechanics be tuned to match a game's tonal register?</p>
-  </div>
-
-  <div class="external-links">
-    <a href="https://dev.azure.com/DustBunnies/DustBunnies" target="_blank" class="ext-btn">View on Azure ↗</a>
+    <p class="section-label">Overview</p>
+    <h2 class="section-title">What I built</h2>
+    <p class="section-text">
+      The concept was a small teddy bear helping objects around a room — easy-going exploration with a main quest from the dustpan and optional side quests scattered through the level. Soraya handled environmental assets and level design; I owned the game mechanics and character systems.
+      <br><br>
+      My responsibilities across alpha and beta builds included the <strong>hang and climb mechanic, double jump, dust bunny collection counter, push mechanic, and a Niagara particle system for dust</strong>. I also fully modeled, textured, rigged, and animated the dust bunny character in Maya — the same skills I used on Agronova, applied here in a smaller scope.
+    </p>
+    <a href="https://dev.azure.com/DustBunnies/DustBunnies" target="_blank" class="ext-link">View on Azure ↗</a>
   </div>
 
 </main>
 <aside class="project-sidebar">
-  <div class="sidebar-block"><p class="sidebar-label">Role</p><p class="sidebar-value">Game Programmer & 3D Artist</p></div>
-  <div class="sidebar-block"><p class="sidebar-label">Team</p><p class="sidebar-value small">Collaborated with Soraya Karimi<br>(environment & level design)</p></div>
+  <div class="sidebar-block"><p class="sidebar-label">Role</p><p class="sidebar-value">Game Programmer</p></div>
+  <div class="sidebar-block"><p class="sidebar-label">Collaborator</p><p class="sidebar-value small">Soraya Karimi<br>Environment Artist</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Context</p><p class="sidebar-value">Purdue University</p></div>
-  <div class="sidebar-block"><p class="sidebar-label">Tools</p><p class="sidebar-value small">Unreal Engine 5<br>C++ & Blueprints<br>Niagara Particle System<br>Autodesk Maya</p></div>
+  <div class="sidebar-block"><p class="sidebar-label">Tools</p><p class="sidebar-value small">Unity<br>C++<br>Blueprints<br>Autodesk Maya<br>Niagara</p></div>
 </aside>
 </div>
 <footer class="project-footer">

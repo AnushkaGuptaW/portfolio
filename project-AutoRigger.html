@@ -22,22 +22,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .project-summary{max-width:700px;font-size:1rem;line-height:1.9;color:var(--muted)}.project-summary strong{color:var(--text);font-weight:400}
 .project-body{display:grid;grid-template-columns:1fr 280px;align-items:start}
 .project-main{padding:4rem 3rem;border-right:1px solid var(--border);opacity:0;animation:fadeUp .8s .4s forwards}
-.media-block{width:100%;aspect-ratio:16/9;background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:3rem;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.media-caption{font-size:.7rem;color:var(--muted);margin-top:-2rem;margin-bottom:3rem}
+.screenshot-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;align-items:start}
+.screenshot-row img{width:100%;height:280px;object-fit:cover;border-radius:10px;border:1px solid var(--border);display:block}
+.screenshot-row img:first-child{height:280px;object-fit:contain;background:var(--surface)}
+.media-caption{font-size:.7rem;color:var(--muted);margin-bottom:3rem;letter-spacing:.05em}
 .section-block{margin-bottom:3rem}
 .section-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .section-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem}
-.section-text{font-size:.85rem;line-height:2;color:var(--muted);max-width:620px}.section-text strong{color:var(--text);font-weight:400}
+.section-text{font-size:.85rem;line-height:2;color:var(--muted)}.section-text strong{color:var(--text);font-weight:400}
 .feature-list{list-style:none;margin-top:1rem}
-.feature-list li{font-size:.82rem;line-height:1.8;color:var(--muted);padding:.75rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem}
-.feature-list li::before{content:'→';color:var(--accent);flex-shrink:0}.feature-list li strong{color:var(--text);font-weight:400}
+.feature-list li{font-size:.82rem;line-height:1.8;color:var(--muted);padding:.75rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem;align-items:flex-start}
+.feature-list li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:.05rem}.feature-list li strong{color:var(--text);font-weight:400}
 .research-callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin:2rem 0}
 .research-callout .label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
 .research-callout p{font-size:.82rem;line-height:1.9;color:var(--muted)}.research-callout p strong{color:var(--text);font-weight:400}
+.ext-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--accent);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(232,146,74,.3);padding:.5rem 1rem;border-radius:4px;transition:all .2s;margin-top:1.5rem}
+.ext-link:hover{background:rgba(232,146,74,.08)}
 .project-sidebar{padding:4rem 2rem;position:sticky;top:73px;opacity:0;animation:fadeUp .8s .5s forwards}
 .sidebar-block{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}.sidebar-block:last-child{border-bottom:none}
 .sidebar-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
-.sidebar-value{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600}
+.sidebar-value{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:600;line-height:1.5}
 .sidebar-value.small{font-family:'DM Mono',monospace;font-size:.78rem;font-weight:400;color:var(--muted);line-height:1.8}
 .project-footer{padding:3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .next-project{text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:.25rem;transition:opacity .2s}.next-project:hover{opacity:.7}
@@ -46,7 +50,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .back-btn{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}.back-btn:hover{color:var(--accent)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}}
+@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.sidebar-block{border-bottom:none;padding-bottom:0}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}.screenshot-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -61,33 +65,44 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 </header>
 <div class="project-body">
 <main class="project-main">
-  <div class="media-block">Add Maya UI screenshot here</div>
-  <p class="media-caption">Auto Rigger custom UI panel — Autodesk Maya, Purdue Capstone 2024</p>
+
+  <!-- Drop screenshots into assets/autorig/ — UI panel + rig in scene -->
+  <div class="screenshot-row">
+    <img src="assets/autorig/autorig_ui.png" alt="Auto Rigger UI panel">
+    <img src="assets/autorig/autorig_scene.png" alt="Rig generated in scene">
+  </div>
+  <p class="media-caption">Custom UI panel and generated rig — Autodesk Maya, Purdue Capstone 2024</p>
+
   <div class="section-block">
     <p class="section-label">The Problem</p>
     <h2 class="section-title">Rigging is slow. It shouldn't be.</h2>
-    <p class="section-text">Rigging characters for Agronova was a manual, repetitive process — joint placement, naming conventions, control curve creation, skinning. Done correctly it takes hours per character. With multiple characters in the pipeline, <strong>the bottleneck was the rigger, not the art.</strong> I built a tool to automate the repeatable parts.</p>
+    <p class="section-text">Rigging characters for Agronova was a manual, repetitive process — joint placement, naming conventions, control curve creation, skinning. Done correctly it takes hours per character. With multiple characters in the pipeline, <strong>the bottleneck was the rigger, not the art.</strong> The tool automates the repeatable parts so animators can focus on what actually needs creative judgment.</p>
   </div>
+
   <div class="section-block">
     <p class="section-label">What I Built</p>
     <h2 class="section-title">Technical breakdown</h2>
     <ul class="feature-list">
-      <li><strong>Custom UI panel</strong> — Maya-native interface built with Python and Qt, with fields for joint naming prefix, rig type (biped / quadruped), and control curve style</li>
-      <li><strong>Node-based architecture</strong> — rig components built as independent nodes connecting via defined interfaces, making it easy to swap or extend individual parts</li>
+      <li><strong>Custom UI panel</strong> — Maya-native interface built with Python and Qt; fields for joint naming prefix, rig type (biped / quadruped), and control curve style — no scripting knowledge needed to use it</li>
+      <li><strong>Node-based architecture</strong> — rig components built as independent nodes connected via defined interfaces, making individual parts swappable without rebuilding the whole rig</li>
       <li><strong>Auto joint placement</strong> — artist drops guides in scene; tool reads guide transforms and generates the joint chain with correct orientation automatically</li>
-      <li><strong>Control curve generation</strong> — NURBS control curves auto-generated and colour-coded by side (left / right / centre) convention</li>
-      <li><strong>Skinning helper</strong> — smooth bind executed with preset options; weights initialised with geodesic voxel algorithm</li>
+      <li><strong>IK/FK setup</strong> — inverse and forward kinematics controls created procedurally for limbs; deformers including skinning and blend shapes set up in the same pass</li>
+      <li><strong>Control curve generation</strong> — NURBS control curves auto-generated and colour-coded by side (left / right / centre) to match standard convention</li>
     </ul>
+    <a href="https://github.com/AnushkaGuptaW/Auto-Rigger-Maya-Python" target="_blank" class="ext-link">View on GitHub ↗</a>
   </div>
+
   <div class="section-block">
     <p class="section-label">Reflection</p>
     <h2 class="section-title">What this taught me</h2>
-    <p class="section-text">This project taught me that <strong>the best tool is the one your teammates actually use</strong>. I iterated the UI three times based on feedback from artists who weren't riggers — the final version required no rigging knowledge to operate.</p>
+    <p class="section-text">I iterated the UI three times based on feedback from artists who weren't riggers — the final version required no rigging knowledge to operate. That taught me that <strong>the best pipeline tool is the one your teammates actually use</strong>, and that accessibility is a design problem as much as a technical one.</p>
   </div>
+
   <div class="research-callout">
     <p class="label">Research Question</p>
     <p>How can <strong>procedural rigging systems</strong> be designed to be flexible enough for custom characters while remaining accessible to non-technical animators — and what are the limits of automation in character setup pipelines?</p>
   </div>
+
 </main>
 <aside class="project-sidebar">
   <div class="sidebar-block"><p class="sidebar-label">Role</p><p class="sidebar-value">Pipeline Developer</p></div>
@@ -95,6 +110,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   <div class="sidebar-block"><p class="sidebar-label">Organisation</p><p class="sidebar-value">Purdue Capstone</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Timeline</p><p class="sidebar-value small">Sep 2023 – Mar 2024<br>Capstone Project</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Tools</p><p class="sidebar-value small">Autodesk Maya<br>Python<br>Maya API / Qt</p></div>
+  <div class="sidebar-block"><p class="sidebar-label">Code</p><p class="sidebar-value small"><a href="https://github.com/AnushkaGuptaW/Auto-Rigger-Maya-Python" target="_blank" style="color:var(--accent);text-decoration:none">GitHub ↗</a></p></div>
 </aside>
 </div>
 <footer class="project-footer">

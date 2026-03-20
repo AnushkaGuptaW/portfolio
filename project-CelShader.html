@@ -25,7 +25,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .video-block{width:65%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem}
 .video-block iframe{width:100%;height:100%;border:none;display:block}
 .media-caption{font-size:.7rem;color:var(--muted);margin-bottom:3rem;letter-spacing:.05em}
-.media-placeholder{width:100%;aspect-ratio:16/9;border-radius:12px;border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
 .section-block{margin-bottom:3rem}
 .section-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
 .section-title{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:1rem;line-height:1.2}
@@ -33,13 +32,23 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .feature-list{list-style:none;margin-top:1rem}
 .feature-list li{font-size:.82rem;line-height:1.8;color:var(--muted);padding:.75rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem;align-items:flex-start}
 .feature-list li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:.05rem}.feature-list li strong{color:var(--text);font-weight:400}
+.swipe-compare{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin:0 auto 1rem;width:70%;user-select:none;cursor:grab}
+.swipe-compare:active{cursor:grabbing}
+.swipe-track{display:flex;transition:transform .3s cubic-bezier(.23,1,.32,1);will-change:transform}
+.swipe-slide{min-width:100%;flex-shrink:0}
+.swipe-slide img{width:100%;display:block;pointer-events:none}
+.swipe-label{position:absolute;top:1rem;left:1rem;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;background:rgba(8,8,8,.75);color:var(--accent);padding:4px 10px;border-radius:4px;pointer-events:none;transition:opacity .2s}
+.swipe-dots{position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem}
+.swipe-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:background .2s}
+.swipe-dot.active{background:var(--accent)}
+.swipe-hint{position:absolute;bottom:1rem;right:1rem;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:rgba(8,8,8,.7);padding:3px 8px;border-radius:4px;pointer-events:none}
+.node-viewer{overflow:scroll;height:520px;cursor:grab;border-radius:12px;border:1px solid var(--border);background:var(--surface);position:relative;user-select:none;margin-bottom:3rem}
+.node-viewer:active{cursor:grabbing}
+.node-viewer img { width: 100%; height: auto; display: block; pointer-events: none; }
+.node-viewer-hint{position:absolute;bottom:8px;right:10px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:rgba(8,8,8,.7);padding:3px 8px;border-radius:4px;pointer-events:none}
 .research-callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin:2rem 0}
 .research-callout .label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
 .research-callout p{font-size:.82rem;line-height:1.9;color:var(--muted)}.research-callout p strong{color:var(--text);font-weight:400}
-.node-viewer{overflow:scroll;height:260px;cursor:grab;border-radius:12px;border:1px solid var(--border);background:var(--surface);position:relative;user-select:none;margin-bottom:3rem}
-.node-viewer:active{cursor:grabbing}
-.node-viewer img{height:100%;max-width:none;display:block;pointer-events:none}
-.node-viewer-hint{position:absolute;bottom:8px;right:10px;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:rgba(8,8,8,.7);padding:3px 8px;border-radius:4px;pointer-events:none}
 .project-sidebar{padding:4rem 2rem;position:sticky;top:73px;opacity:0;animation:fadeUp .8s .5s forwards}
 .sidebar-block{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}.sidebar-block:last-child{border-bottom:none}
 .sidebar-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
@@ -52,7 +61,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .back-btn{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}.back-btn:hover{color:var(--accent)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.sidebar-block{border-bottom:none;padding-bottom:0}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}}
+@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.sidebar-block{border-bottom:none;padding-bottom:0}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}.compare-row{grid-template-columns:1fr}.video-block{width:100%}}
 </style>
 </head>
 <body>
@@ -69,14 +78,40 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 <main class="project-main">
 
   <div class="video-block">
-    <iframe src="https://www.youtube.com/embed/yFERDNLbpC8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/fU_sTmP683w?start=1003" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
-  <p class="media-caption">Cel shader implementation for Sunflower — P1 Games 2024</p>
+  <p class="media-caption">Curing Corruption gameplay — cel shader and PBR iteration in use</p>
 
   <div class="section-block">
     <p class="section-label">The Problem</p>
     <h2 class="section-title">When the aesthetic stopped fitting</h2>
-    <p class="section-text">Sunflower started with a cel-shaded look — flat colour bands, hard shadow edges, hand-drawn feel. The shader worked technically, but as the game's environment developed the flat shading started to fight the lighting. The team decided the world needed more physical weight. That meant rebuilding the shader around a <strong>physically-based rendering approach</strong> instead.</p>
+    <p class="section-text">Curing Corruption started with a cel-shaded look — flat colour bands, hard shadow edges, hand-drawn feel. The shader worked technically, but as the game's environment developed the flat shading started to fight the lighting. The team decided the world needed more physical weight. That meant rebuilding the shader around a <strong>physically-based rendering approach</strong> instead.</p>
+  </div>
+
+  <div class="section-block">
+    <p class="section-label">Visual evolution</p>
+    <h2 class="section-title">No shader → Cel → PBR</h2>
+    <div class="swipe-compare" id="swipeCompare">
+      <div class="swipe-track" id="swipeTrack">
+        <div class="swipe-slide">
+          <img src="assets/cel/BaseScene.png" alt="No post process">
+        </div>
+        <div class="swipe-slide">
+          <img src="assets/cel/celShaderPP.png" alt="Cel shader">
+        </div>
+        <div class="swipe-slide">
+          <img src="assets/cel/celShaderPBR.png" alt="PBR iteration">
+        </div>
+      </div>
+      <div class="swipe-label" id="swipeLabel">No post process</div>
+      <div class="swipe-dots" id="swipeDots">
+        <span class="swipe-dot active" data-i="0"></span>
+        <span class="swipe-dot" data-i="1"></span>
+        <span class="swipe-dot" data-i="2"></span>
+      </div>
+      <div class="swipe-hint">swipe or drag to compare</div>
+    </div>
+    <p class="media-caption">Same scene — three rendering states showing the aesthetic shift</p>
   </div>
 
   <div class="section-block">
@@ -85,17 +120,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
     <ul class="feature-list">
       <li><strong>Diffuse banding</strong> — scene colour channel isolated into fixed value bands to create flat toon shading; blendable location set to "scene color before DOF" to reduce shadow jitter</li>
       <li><strong>Threshold stepping</strong> — instead of smooth gradients, light values snapped to discrete stops giving the characteristic cel look</li>
-      <li><strong>PBR iteration</strong> — the rebuilt version removed the banding and worked with UE5's physically-based material pipeline directly, preserving roughness and metallic channels</li>
+      <li><strong>PBR iteration</strong> — the rebuilt version removed banding and worked with UE5's physically-based material pipeline directly, preserving roughness and metallic channels</li>
     </ul>
   </div>
 
-  <!-- Add screenshots here when available -->
-  <!-- <div class="media-placeholder">Add before/after screenshots here</div> -->
-  <!-- Pannable blueprint — add when you have the BP screenshot -->
   <div class="node-viewer" id="nodeViewer">
     <img src="assets/cel/cel_bp.png" alt="Cel Shader Blueprint" id="nodeImg">
     <span class="node-viewer-hint">drag to pan · scroll to zoom</span>
-  </div> 
+  </div>
 
   <div class="section-block">
     <p class="section-label">Reflection</p>
@@ -111,7 +143,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 </main>
 <aside class="project-sidebar">
   <div class="sidebar-block"><p class="sidebar-label">Role</p><p class="sidebar-value">Shader Developer</p></div>
-  <div class="sidebar-block"><p class="sidebar-label">Project</p><p class="sidebar-value">Sunflower</p></div>
+  <div class="sidebar-block"><p class="sidebar-label">Project</p><p class="sidebar-value">Curing Corruption</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Organisation</p><p class="sidebar-value">P1 Games</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Timeline</p><p class="sidebar-value small">Aug–Oct 2024<br>8-week sprint</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Tools</p><p class="sidebar-value small">Unreal Engine 5<br>UE5 Material Editor<br>Post Process Volume</p></div>
@@ -122,14 +154,49 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   <a href="project-DeerAI.html" class="next-project"><span class="next-label">Next Project →</span><span class="next-title">Deer AI Behaviour System</span></a>
 </footer>
 <script>
-  const viewer = document.getElementById('nodeViewer');
-  if(viewer){
-    const img = document.getElementById('nodeImg');
-    let dragging=false,startX=0,startY=0,sX=0,sY=0,scale=1;
-    viewer.addEventListener('wheel',e=>{e.preventDefault();scale=Math.min(4,Math.max(1,scale+(e.deltaY>0?-.15:.15)));img.style.transform=`scale(${scale})`;img.style.transformOrigin='top left';},{passive:false});
-    viewer.addEventListener('mousedown',e=>{dragging=true;startX=e.pageX;startY=e.pageY;sX=viewer.scrollLeft;sY=viewer.scrollTop;viewer.style.cursor='grabbing';e.preventDefault();});
-    window.addEventListener('mouseup',()=>{dragging=false;if(viewer)viewer.style.cursor='grab';});
-    viewer.addEventListener('mousemove',e=>{if(!dragging)return;viewer.scrollLeft=sX-(e.pageX-startX);viewer.scrollTop=sY-(e.pageY-startY);});
+  const labels=['No post process','Cel shader','PBR iteration'];
+  const track=document.getElementById('swipeTrack');
+  const label=document.getElementById('swipeLabel');
+  const dots=document.querySelectorAll('.swipe-dot');
+  let current=0,startX=0,diffX=0,dragging=false;
+
+  function goTo(i){
+    current=Math.max(0,Math.min(2,i));
+    track.style.transform=`translateX(-${current*100}%)`;
+    label.textContent=labels[current];
+    dots.forEach((d,idx)=>d.classList.toggle('active',idx===current));
   }
+
+  dots.forEach(d=>d.addEventListener('click',()=>goTo(+d.dataset.i)));
+
+  const el=document.getElementById('swipeCompare');
+  el.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX;track.style.transition='none';});
+  window.addEventListener('mouseup',e=>{
+    if(!dragging)return;dragging=false;
+    track.style.transition='transform .3s cubic-bezier(.23,1,.32,1)';
+    diffX=e.clientX-startX;
+    if(diffX<-40)goTo(current+1);else if(diffX>40)goTo(current-1);else goTo(current);
+  });
+  el.addEventListener('mousemove',e=>{
+    if(!dragging)return;
+    const d=e.clientX-startX;
+    track.style.transform=`translateX(calc(-${current*100}% + ${d}px))`;
+  });
+  el.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;track.style.transition='none';},{passive:true});
+  el.addEventListener('touchend',e=>{
+    track.style.transition='transform .3s cubic-bezier(.23,1,.32,1)';
+    diffX=e.changedTouches[0].clientX-startX;
+    if(diffX<-40)goTo(current+1);else if(diffX>40)goTo(current-1);else goTo(current);
+  });
+  el.addEventListener('touchmove',e=>{
+    const d=e.touches[0].clientX-startX;
+    track.style.transform=`translateX(calc(-${current*100}% + ${d}px))`;
+  },{passive:true});
+  const viewer=document.getElementById('nodeViewer');
+  if(viewer){const img=document.getElementById('nodeImg');let d=false,sX=0,sY=0,oX=0,oY=0,scale=1;
+  viewer.addEventListener('wheel',e=>{e.preventDefault();scale=Math.min(4,Math.max(1,scale+(e.deltaY>0?-.15:.15)));img.style.transform=`scale(${scale})`;img.style.transformOrigin='top left';},{passive:false});
+  viewer.addEventListener('mousedown',e=>{d=true;sX=e.pageX;sY=e.pageY;oX=viewer.scrollLeft;oY=viewer.scrollTop;viewer.style.cursor='grabbing';e.preventDefault();});
+  window.addEventListener('mouseup',()=>{d=false;if(viewer)viewer.style.cursor='grab';});
+  viewer.addEventListener('mousemove',e=>{if(!d)return;viewer.scrollLeft=oX-(e.pageX-sX);viewer.scrollTop=oY-(e.pageY-sY);});}
 </script>
 </body></html>

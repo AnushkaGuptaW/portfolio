@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>P1 Games: Sunflower — Anushka Gupta</title>
+<title>P1 Games: Curing Corruption — Anushka Gupta</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -29,6 +29,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .link-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
 .ext-link{display:inline-flex;align-items:center;gap:.5rem;text-decoration:none;color:var(--accent);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(232,146,74,.3);padding:.5rem 1rem;border-radius:4px;transition:all .2s}
 .ext-link:hover{background:rgba(232,146,74,.08)}
+.video-block{width:65%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem}
+.video-block iframe{width:100%;height:100%;border:none;display:block}
+.media-caption{font-size:.7rem;color:var(--muted);margin-bottom:3rem;letter-spacing:.05em}
 .project-sidebar{padding:4rem 2rem;position:sticky;top:73px;opacity:0;animation:fadeUp .8s .5s forwards}
 .sidebar-block{margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}.sidebar-block:last-child{border-bottom:none}
 .sidebar-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
@@ -41,33 +44,38 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .back-btn{text-decoration:none;color:var(--muted);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}.back-btn:hover{color:var(--accent)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.sidebar-block{border-bottom:none;padding-bottom:0}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}}
+@media(max-width:900px){nav{padding:1.25rem 1.5rem}.project-hero{padding:8rem 1.5rem 3rem}.project-body{grid-template-columns:1fr}.project-main{padding:3rem 1.5rem;border-right:none}.project-sidebar{padding:0 1.5rem 3rem;position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.sidebar-block{border-bottom:none;padding-bottom:0}.project-footer{flex-direction:column;gap:2rem;align-items:flex-start;padding:2rem 1.5rem}.video-block{width:100%}}
 </style>
 </head>
 <body>
 <nav><a href="index.html" class="nav-name">Anushka Gupta</a><a href="index.html" class="nav-back">← All Work</a></nav>
 <header class="project-hero">
   <div class="breadcrumb">All Work <span>/</span> Game Mechanics</div>
-  <h1 class="project-title">P1 Games:<br>Sunflower</h1>
+  <h1 class="project-title">P1 Games:<br>Curing Corruption</h1>
   <div class="project-meta-row">
     <span class="tag">Game Programmer</span><span class="tag engine">UE5</span>
   </div>
-  <p class="project-summary">An <strong>8-week volunteer game jam sprint</strong> with team Mighty Hibiscus under P1 Games — I contributed the dialogue system, deer AI behavior, and cel shader post-process.</p>
+  <p class="project-summary">An <strong>8-week volunteer game jam sprint</strong> with team Mighty Hibiscus under P1 Games — I contributed the dialogue system, deer AI behavior, and cel→PBR shader post-process.</p>
 </header>
 <div class="project-body">
 <main class="project-main">
+
+  <div class="video-block">
+    <iframe src="https://www.youtube.com/embed/fU_sTmP683w?start=1003" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <p class="media-caption">Curing Corruption — credits and gameplay</p>
 
   <div class="section-block">
     <p class="section-label">Overview</p>
     <h2 class="section-title">My contributions</h2>
     <p class="section-text">
-      Sunflower was the context for three separate systems I built over the sprint — the <strong>branching dialogue system</strong>, the <strong>deer NPC behavior tree</strong>, and the <strong>cel shader post-process</strong>. Each of those has its own dedicated page. This page is the project context that ties them together.
+      Curing Corruption was the context for three separate systems I built over the sprint — the <strong>branching dialogue system</strong>, the <strong>deer NPC behavior tree</strong>, and the <strong>cel→PBR shader</strong>. Each has its own dedicated page. This page is the project context that ties them together.
       <br><br>
       Working in a volunteer team under sprint pressure taught me a lot about scoping — deciding what to prototype versus what to actually ship. The deer AI got cut. The shader evolved. The dialogue system shipped.
     </p>
     <div class="link-row">
-      <a href="https://exmarcs.itch.io/sunflower" target="_blank" class="ext-link">Play on itch.io ↗</a>
-      <a href="https://github.com/MjGalicha/Mighty-Hibiscus" target="_blank" class="ext-link">GitHub ↗</a>
+      <a href="https://devon-paige.itch.io/curing-corruption" target="_blank" class="ext-link">Play on itch.io ↗</a>
+      <!-- <a href="https://github.com/MjGalicha/Mighty-Hibiscus" target="_blank" class="ext-link">GitHub ↗</a> -->
     </div>
   </div>
 
@@ -77,7 +85,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
   <div class="sidebar-block"><p class="sidebar-label">Team</p><p class="sidebar-value">Mighty Hibiscus</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Organisation</p><p class="sidebar-value">P1 Games</p></div>
   <div class="sidebar-block"><p class="sidebar-label">Timeline</p><p class="sidebar-value small">Aug–Oct 2024<br>8-week sprint</p></div>
-  <div class="sidebar-block"><p class="sidebar-label">Related pages</p><p class="sidebar-value small"><a href="project-DialogueSystem.html" style="color:var(--accent);text-decoration:none">Dialogue System</a><br><a href="project-DeerAI.html" style="color:var(--accent);text-decoration:none">Deer AI</a><br><a href="project-CelShader.html" style="color:var(--accent);text-decoration:none">Cel → PBR Shader</a></p></div>
+  <div class="sidebar-block"><p class="sidebar-label">Related pages</p><p class="sidebar-value small">
+    <a href="project-DialogueSystem.html" style="color:var(--accent);text-decoration:none">Dialogue System</a><br>
+    <a href="project-DeerAI.html" style="color:var(--accent);text-decoration:none">Deer AI</a><br>
+    <a href="project-CelShader.html" style="color:var(--accent);text-decoration:none">Cel → PBR Shader</a>
+  </p></div>
 </aside>
 </div>
 <footer class="project-footer">
